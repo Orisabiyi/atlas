@@ -61,6 +61,37 @@ body {
   font-size: 2rem;
 }
 
+.header {
+  padding: 6rem 4rem;
+}
+
+.header__search-bar {
+  position: relative;
+}
+
+.header__search-bar img {
+  width: 2rem;
+  height: 2rem;
+  display: block;
+
+  position: absolute;
+  top: 50%;
+  left: 4rem;
+  transform: translateY(-50%);
+}
+
+.header__search-bar input {
+  padding: 1.5rem 8rem;
+  font-family: inherit;
+  font-size: 1.6rem;
+
+  outline: 0;
+  border: 0;
+  background: var(--color-white);
+  box-shadow: 0 0.2rem 1rem rgba(0, 0, 0, 0.126);
+  border-radius: 0.5rem;
+}
+
 h2 {
   font-weight: 600;
 }
