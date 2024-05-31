@@ -65,6 +65,12 @@ body {
   padding: 6rem 4rem;
 }
 
+.header__search {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
 .header__search-bar {
   position: relative;
 }
@@ -90,6 +96,14 @@ body {
   background: var(--color-white);
   box-shadow: 0 0.2rem 1rem rgba(0, 0, 0, 0.126);
   border-radius: 0.5rem;
+}
+
+select {
+  padding: 1.5rem 4rem;
+  border: 0;
+  outline: 0;
+  background-color: var(--color-white);
+  box-shadow: 0 0.2rem 1rem rgba(0, 0, 0, 0.126);
 }
 
 h2 {
