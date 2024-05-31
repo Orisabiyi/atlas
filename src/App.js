@@ -1,3 +1,9 @@
+import NavBar from "./components/NavBar";
+
 export default function App() {
-  return <h1></h1>;
+  return (
+    <>
+      <NavBar />
+    </>
+  );
 }

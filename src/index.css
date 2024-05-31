@@ -8,13 +8,59 @@
   box-sizing: border-box;
 }
 
+:root {
+  /* DarkMode */
+  --dark-blue-element: hsl(209, 23%, 22%);
+  --very-dark-blue-bg: hsl(207, 26%, 17%);
+
+  /* LightMode */
+  --very-dark-blue-text: hsl(200, 15%, 8%);
+  --dark-gray-input: hsl(0, 0%, 52%);
+  --very-light-gray-bg: hsl(0, 0%, 98%);
+
+  /* light mode element and dark mode element*/
+  --color-white: hsl(0, 0%, 100%);
+}
+
 html {
   font-size: 62.5%;
 }
 
 body {
-  font-family: "Nunito Sans", sans-serif;
-  font-optical-sizing: auto;
   font-weight: 300;
   font-size: 1.4rem;
+  overflow-x: hidden;
+  font-optical-sizing: auto;
+  font-family: "Nunito Sans", sans-serif;
+  background: var(--very-light-gray-bg);
+}
+
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  background-color: var(--color-white);
+  box-shadow: 0 0 1rem rgba(0, 0, 0, 0.3);
+  padding: 3rem 4rem;
+}
+
+.navbar__mode {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.navbar__mode img {
+  width: 2.5rem;
+  height: 2.5rem;
+  display: block;
+}
+
+.navbar__mode h2 {
+  font-size: 2rem;
+}
+
+h2 {
+  font-weight: 600;
 }
