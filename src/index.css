@@ -63,6 +63,11 @@ body {
 
 .header {
   padding: 6rem 4rem;
+  min-height: 100vh;
+
+  display: grid;
+  grid-template-rows: auto 1fr;
+  gap: 2rem;
 }
 
 .header__search {
