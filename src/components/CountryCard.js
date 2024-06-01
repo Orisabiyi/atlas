@@ -13,15 +13,15 @@ export default function CountryCard({ data }) {
             <div className="card__info">
               <h2>{item.name.official}</h2>
               <p>
-                <span>Population:</span>
-                {item.population}
+                <span>Population: </span>
+                {Intl.NumberFormat().format(item.population)}
               </p>
               <p>
-                <span>Region:</span>
-                {item.population}
+                <span>Region: </span>
+                {item.region}
               </p>
               <p>
-                <span>Capital:</span>
+                <span>Capital: </span>
                 {item.capital}
               </p>
             </div>
