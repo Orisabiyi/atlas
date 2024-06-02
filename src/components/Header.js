@@ -3,7 +3,7 @@ import CountryCard from "./CountryCard";
 import Filter from "./Filter";
 import Search from "./Search";
 
-export default function Header() {
+export default function Header({ isDark }) {
   const [data, setData] = useState(null);
   const [error, setError] = useState(null);
   const [search, setSearch] = useState("all");
@@ -22,7 +22,7 @@ export default function Header() {
   getCountries(search);
 
   return (
-    <header className="header">
+    <header className={`header ${isDark ? "header-dark" : ""}`}>
       <div className="header__search">
         <Search setSearch={setSearch} />
         <Filter />
