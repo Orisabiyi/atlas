@@ -1,12 +1,4 @@
-import { useState } from "react";
-
-export default function NavBar() {
-  const [isDark, setIsDark] = useState(false);
-
-  function handleClick() {
-    setIsDark((mode) => !mode);
-  }
-
+export default function NavBar({ isDark = "false", handleClick }) {
   return (
     <nav className={`navbar ${isDark ? "navbar-dark" : ""}`}>
       <h1>AtlasApp</h1>
