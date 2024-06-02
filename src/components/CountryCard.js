@@ -1,9 +1,7 @@
 export default function CountryCard({ data }) {
-  // data?.map((item) => console.log(item));
-
   return (
     <>
-      {data &&
+      {Array.isArray(data) &&
         data?.map((item) => {
           return (
             <div className="card">

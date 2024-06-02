@@ -1,23 +1,20 @@
-import { useState } from "react";
-
-export default function Search({ getCountries }) {
-  const [search, setSearch] = useState("all");
-
-  function handleSubmit(e) {
-    e.preventDefault();
-    getCountries(search);
-  }
-
+export default function Search({ setSearch }) {
   return (
     <>
-      <form className="header__search-bar" onSubmit={handleSubmit}>
+      <div className="header__search-bar">
         <img src="asset/search.svg" alt="search icon" />
         <input
           type="text"
           placeholder="Search for a country..."
-          onChange={(e) => setSearch(e.target.value)}
+          onChange={(e) =>
+            setSearch(
+              e.target.value === ""
+                ? "all"
+                : `name/${e.target.value.toLocaleLowerCase()}`
+            )
+          }
         />
-      </form>
+      </div>
     </>
   );
 }

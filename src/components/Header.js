@@ -6,10 +6,11 @@ import Search from "./Search";
 export default function Header() {
   const [data, setData] = useState(null);
   const [error, setError] = useState(null);
+  const [search, setSearch] = useState("all");
 
-  const getCountries = async function (param) {
+  const getCountries = async function (name = "all") {
     try {
-      const res = await fetch(`https://restcountries.com/v3.1/${param}`);
+      const res = await fetch(`https://restcountries.com/v3.1/${name}`);
       const data = await res.json();
       setData(data);
     } catch (error) {
@@ -18,12 +19,12 @@ export default function Header() {
   };
 
   useEffect(() => getCountries, []);
-  getCountries("all");
+  getCountries(search);
 
   return (
     <header className="header">
       <div className="header__search">
-        <Search country={getCountries} />
+        <Search setSearch={setSearch} />
         <Filter />
       </div>
 
