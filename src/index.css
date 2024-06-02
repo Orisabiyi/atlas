@@ -45,6 +45,11 @@ body {
   padding: 3rem 4rem;
 }
 
+.navbar-dark {
+  background: var(--dark-blue-element);
+  color: var(--color-white);
+}
+
 .navbar__mode {
   display: flex;
   align-items: center;

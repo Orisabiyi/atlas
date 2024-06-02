@@ -8,7 +8,7 @@ export default function NavBar() {
   }
 
   return (
-    <nav className="navbar">
+    <nav className={`navbar ${isDark ? "navbar-dark" : ""}`}>
       <h1>AtlasApp</h1>
       <div role="button" className="navbar__mode" onClick={handleClick}>
         <img src="asset/moon.svg" alt="moon icon" />
