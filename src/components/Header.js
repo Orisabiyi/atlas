@@ -1,4 +1,5 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
+import _ from "lodash";
 import CountryCard from "./CountryCard";
 import Filter from "./Filter";
 import Search from "./Search";
@@ -35,12 +36,13 @@ export default function Header({ isDark }) {
   //   [search]
   // );
 
-  const fetchCountries = async function (searchTerm) {
-    if (searchTerm && cache[searchTerm]) {
-      setCountries(cache[searchTerm]);
+  const fetchCountries = async function (search) {
+    if (search && cache[search]) {
+      setCountries(cache[search]);
+      setError("");
     }
 
-    if (searchTerm && !cache[searchTerm]) {
+    if (search && !cache[search]) {
       try {
         const response = await fetch(
           `https://restcountries.com/v3.1/${
@@ -48,15 +50,32 @@ export default function Header({ isDark }) {
           }`
         );
 
+        if (!response.ok) throw new Error("Country not found");
+
         const data = await response.json();
 
         setCountries(data);
-        setCache((prevCache) => ({ ...prevCache, [searchTerm]: data }));
+        setCache((prevCache) => ({ ...prevCache, [search]: data }));
+        setError("");
       } catch (error) {
-        console.log(error.message);
+        setError(error.message);
       }
     }
   };
+
+  const debouncedFetchCountries = useCallback(
+    _.debounce((search) => {
+      fetchCountries(search);
+    }, 300),
+    [cache]
+  );
+
+  useEffect(
+    function () {
+      debouncedFetchCountries(search);
+    },
+    [search, debouncedFetchCountries]
+  );
 
   return (
     <header className={`header ${isDark ? "header-dark" : ""}`}>
@@ -66,7 +85,7 @@ export default function Header({ isDark }) {
       </div>
 
       <div className="header__card">
-        {error ? error : <CountryCard data={countries} />}
+        {error && search !== "all" ? error : <CountryCard data={countries} />}
       </div>
     </header>
   );
