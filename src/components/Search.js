@@ -8,9 +8,7 @@ export default function Search({ setSearch }) {
           placeholder="Search for a country..."
           onChange={(e) =>
             setSearch(
-              e.target.value === ""
-                ? "all"
-                : `name/${e.target.value.toLocaleLowerCase()}`
+              e.target.value === "" ? "all" : e.target.value.toLowerCase()
             )
           }
         />
