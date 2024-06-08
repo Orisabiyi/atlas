@@ -64,10 +64,10 @@ export default function Header({ isDark }) {
   };
 
   const debouncedFetchCountries = useCallback(
-    _.debounce((search) => {
-      fetchCountries(search);
+    _.debounce(async (search) => {
+      await fetchCountries(search);
     }, 300),
-    [cache]
+    [cache] // Add fetchCountries as a dependency
   );
 
   useEffect(
