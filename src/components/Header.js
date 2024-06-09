@@ -1,5 +1,4 @@
-import { useCallback, useEffect, useState } from "react";
-import _ from "lodash";
+import { useEffect, useState } from "react";
 import CountryCard from "./CountryCard";
 import Filter from "./Filter";
 import Search from "./Search";
@@ -9,72 +8,51 @@ export default function Header({ isDark }) {
   const [error, setError] = useState("");
   const [search, setSearch] = useState("all");
   const [cache, setCache] = useState({});
-
-  // useEffect(
-  //   function () {
-  //     const getCountries = async function () {
-  //       try {
-  //         const res = await fetch(
-  //           `https://restcountries.com/v3.1/${
-  //             search !== "all" ? `name/${search}` : "all"
-  //           }`
-  //         );
-  //         if (!res.ok) throw new Error("Country not found");
-
-  //         const data = await res.json();
-  //         console.log(data);
-
-  //         setData(data);
-  //         setError("");
-  //       } catch (error) {
-  //         setError(error.message);
-  //       }
-  //     };
-
-  //     getCountries();
-  //   },
-  //   [search]
-  // );
-
-  const fetchCountries = async function (search) {
-    if (search && cache[search]) {
-      setCountries(cache[search]);
-      setError("");
-    }
-
-    if (search && !cache[search]) {
-      try {
-        const response = await fetch(
-          `https://restcountries.com/v3.1/${
-            search !== "all" ? `name/${search}` : "all"
-          }`
-        );
-
-        if (!response.ok) throw new Error("Country not found");
-
-        const data = await response.json();
-
-        setCountries(data);
-        setCache((prevCache) => ({ ...prevCache, [search]: data }));
-        setError("");
-      } catch (error) {
-        setError(error.message);
-      }
-    }
-  };
-
-  const debouncedFetchCountries = useCallback(
-    _.debounce(async (search) => {
-      await fetchCountries(search);
-    }, 300),
-    [cache] // Add fetchCountries as a dependency
-  );
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(
     function () {
-      debouncedFetchCountries(search);
+      const controller = new AbortController();
+
+      const fetchCountries = async function () {
+        if (search && cache[search]) {
+          setCountries(cache[search]);
+          setError("");
+        }
+
+        if (search && !cache[search]) {
+          setIsLoading(true);
+          try {
+            const response = await fetch(
+              `https://restcountries.com/v3.1/${
+                search !== "all" ? `name/${search}` : "all"
+              }`,
+              { signal: controller.signal }
+            );
+
+            if (!response.ok) throw new Error("Country not found");
+
+            const data = await response.json();
+
+            setCountries(data);
+            setCache((prevCache) => ({ ...prevCache, [search]: data }));
+            setError("");
+          } catch (error) {
+            if (error.name === "AbortError") return;
+            setError(error.message);
+          }
+          setIsLoading(false);
+        }
+      };
+
+      fetchCountries();
+
+      // cleanup
+      return function () {
+        controller.abort();
+      };
     },
-    [search, debouncedFetchCountries]
+    [search, cache]
   );
 
   return (
@@ -85,7 +63,9 @@ export default function Header({ isDark }) {
       </div>
 
       <div className="header__card">
-        {error && search !== "all" ? error : <CountryCard data={countries} />}
+        {isLoading && <p>Loading..</p>}
+        {!isLoading && !error && <CountryCard data={countries} />}
+        {!isLoading && error && error}
       </div>
     </header>
   );
