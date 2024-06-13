@@ -135,9 +135,20 @@ body {
   height: 40rem;
   border-radius: 0.5rem;
   box-shadow: 0 0.2rem 1rem rgba(0, 0, 0, 0.126);
+  background: var(--very-light-gray-bg);
 
   display: flex;
   flex-direction: column;
+}
+
+.header-dark .card {
+  background: var(--dark-blue-element);
+  color: var(--color-white);
+}
+
+.card,
+.card__img {
+  border-radius: 0.5rem;
 }
 
 .card__img,
@@ -147,7 +158,6 @@ body {
 
 .card__img {
   width: 100%;
-  border-radius: 0.5rem;
 }
 
 .card__img img {
@@ -156,10 +166,12 @@ body {
   display: block;
   border-top-right-radius: 0.5rem;
   border-top-left-radius: 0.5rem;
+  border-radius: 0.5rem 0.5rem 0 0;
 }
 
 .card__info {
   padding: 2.5rem;
+  border-radius: 0 0 0.5rem 0.5rem;
 
   display: flex;
   justify-content: center;
