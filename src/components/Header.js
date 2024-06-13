@@ -5,9 +5,9 @@ import Search from "./Search";
 
 export default function Header({ isDark }) {
   const [countries, setCountries] = useState([]);
-  const [error, setError] = useState("");
   const [search, setSearch] = useState("all");
   const [cache, setCache] = useState({});
+  const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(
