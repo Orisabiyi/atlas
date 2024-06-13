@@ -63,25 +63,33 @@ export default function Header({ isDark }) {
   useEffect(
     function () {
       const fetchCountriesByRegion = async function () {
-        try {
-          if (!region) return;
-          setIsLoading(true);
-          const response =
-            await fetch(`https://restcountries.com/v3.1/region/${region}
-        `);
-          const data = await response.json();
+        if (region && cache[region]) {
+          setCountries(cache[region]);
+          setError("");
+        }
 
-          setCountries(data);
-        } catch (error) {
-          console.log(error.message);
-        } finally {
-          setIsLoading(false);
+        if (region && !cache[region]) {
+          try {
+            setIsLoading(true);
+            const response =
+              await fetch(`https://restcountries.com/v3.1/region/${region}
+          `);
+            const data = await response.json();
+
+            setCountries(data);
+            setCache((prevCache) => ({ ...prevCache, [region]: data }));
+            setError("");
+          } catch (error) {
+            setError(error.message);
+          } finally {
+            setIsLoading(false);
+          }
         }
       };
 
       fetchCountriesByRegion();
     },
-    [region]
+    [region, cache]
   );
 
   return (
