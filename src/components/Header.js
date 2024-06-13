@@ -4,11 +4,11 @@ import Filter from "./Filter";
 import Search from "./Search";
 
 export default function Header({ isDark }) {
-  const [countries, setCountries] = useState([]);
   const [search, setSearch] = useState("all");
   const [cache, setCache] = useState({});
-  const [region, setRegion] = useState("africa");
   const [error, setError] = useState("");
+  const [region, setRegion] = useState("");
+  const [countries, setCountries] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
 
   function handleSetRegion(e) {
@@ -58,6 +58,30 @@ export default function Header({ isDark }) {
       };
     },
     [search, cache]
+  );
+
+  useEffect(
+    function () {
+      const fetchCountriesByRegion = async function () {
+        try {
+          if (!region) return;
+          setIsLoading(true);
+          const response =
+            await fetch(`https://restcountries.com/v3.1/region/${region}
+        `);
+          const data = await response.json();
+
+          setCountries(data);
+        } catch (error) {
+          console.log(error.message);
+        } finally {
+          setIsLoading(false);
+        }
+      };
+
+      fetchCountriesByRegion();
+    },
+    [region]
   );
 
   return (
