@@ -22,6 +22,7 @@ export default function Header({ isDark }) {
       const fetchCountries = async function () {
         if (search && cache[search]) {
           setCountries(cache[search]);
+          setRegion("");
           setError("");
         }
 
@@ -41,6 +42,7 @@ export default function Header({ isDark }) {
 
             setCountries(data);
             setCache((prevCache) => ({ ...prevCache, [search]: data }));
+            setRegion("");
             setError("");
           } catch (error) {
             if (error.name === "AbortError") return;
@@ -65,6 +67,7 @@ export default function Header({ isDark }) {
       const fetchCountriesByRegion = async function () {
         if (region && cache[region]) {
           setCountries(cache[region]);
+          setSearch("all");
           setError("");
         }
 
@@ -78,6 +81,7 @@ export default function Header({ isDark }) {
 
             setCountries(data);
             setCache((prevCache) => ({ ...prevCache, [region]: data }));
+            setSearch("all");
             setError("");
           } catch (error) {
             setError(error.message);
