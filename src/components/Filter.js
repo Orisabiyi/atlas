@@ -1,14 +1,6 @@
-import { useState } from "react";
-
-export default function Filter() {
-  const [region, setRegion] = useState("africa");
-
+export default function Filter({ region, onSetRegion }) {
   return (
-    <select
-      name="filter"
-      value={region}
-      onChange={(e) => setRegion(e.target.value)}
-    >
+    <select name="filter" value={region} onChange={onSetRegion}>
       <option value="africa">Africa</option>
       <option value="america">America</option>
       <option value="asia">Asia</option>

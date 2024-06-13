@@ -7,8 +7,13 @@ export default function Header({ isDark }) {
   const [countries, setCountries] = useState([]);
   const [search, setSearch] = useState("all");
   const [cache, setCache] = useState({});
+  const [region, setRegion] = useState("africa");
   const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+
+  function handleSetRegion(e) {
+    setRegion(e.target.value);
+  }
 
   useEffect(
     function () {
@@ -59,7 +64,7 @@ export default function Header({ isDark }) {
     <header className={`header ${isDark ? "header-dark" : ""}`}>
       <div className="header__search">
         <Search setSearch={setSearch} />
-        <Filter />
+        <Filter region={region} onSetRegion={handleSetRegion} />
       </div>
 
       <div className="header__card">
