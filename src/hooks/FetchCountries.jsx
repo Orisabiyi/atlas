@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 
-function useFetchCountries() {
+function useFetchCountriesandRegion() {
   const [search, setSearch] = useState("all");
   const [cache, setCache] = useState({});
   const [error, setError] = useState("");
@@ -55,19 +55,41 @@ function useFetchCountries() {
     [search, cache]
   );
 
-  return {
-    setSearch,
-    setRegion,
-    setCountries,
-    setIsLoading,
-    setError,
-    setCache,
-    error,
-    cache,
-    region,
-    countries,
-    isLoading,
-  };
+  useEffect(
+    function () {
+      const fetchCountriesByRegion = async function () {
+        if (region && cache[region]) {
+          setCountries(cache[region]);
+          setSearch("all");
+          setError("");
+        }
+
+        if (region && !cache[region]) {
+          try {
+            setIsLoading(true);
+            const response =
+              await fetch(`https://restcountries.com/v3.1/region/${region}
+          `);
+            const data = await response.json();
+
+            setCountries(data);
+            setCache((prevCache) => ({ ...prevCache, [region]: data }));
+            setSearch("all");
+            setError("");
+          } catch (error) {
+            setError(error.message);
+          } finally {
+            setIsLoading(false);
+          }
+        }
+      };
+
+      fetchCountriesByRegion();
+    },
+    [region, cache]
+  );
+
+  return { setSearch, setRegion, error, region, countries, isLoading };
 }
 
-export { useFetchCountries };
+export { useFetchCountriesandRegion };
