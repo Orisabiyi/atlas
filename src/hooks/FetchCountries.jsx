@@ -15,7 +15,7 @@ function useFetchCountriesandRegion() {
       const fetchCountries = async function () {
         if (search && cache[search]) {
           setCountries(cache[search]);
-          setRegion("");
+          // setRegion("");
           setError("");
         }
 
@@ -35,7 +35,7 @@ function useFetchCountriesandRegion() {
 
             setCountries(data);
             setCache((prevCache) => ({ ...prevCache, [search]: data }));
-            setRegion("");
+            // setRegion("");
             setError("");
           } catch (error) {
             if (error.name === "AbortError") return;
