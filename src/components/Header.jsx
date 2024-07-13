@@ -8,11 +8,15 @@ export default function Header({ isDark }) {
   const { setSearch, setRegion, error, region, countries, isLoading } =
     useFetchCountriesandRegion();
 
+  function handleSetRegion(e) {
+    setRegion(e.target.value);
+  }
+
   return (
     <header className={`header ${isDark ? "header-dark" : ""}`}>
       <div className="header__search">
         <Search setSearch={setSearch} />
-        <Filter region={region} onSetRegion={setRegion} />
+        <Filter region={region} onSetRegion={handleSetRegion} />
       </div>
 
       <div className="header__card">

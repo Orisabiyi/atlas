@@ -8,7 +8,6 @@ function App() {
       <Routes>
         <Route path="/" element={<Homepage />}>
           <Route index element={<Header />} />
-          <Route path=":id" element={<Header />} />
         </Route>
       </Routes>
     </BrowserRouter>
