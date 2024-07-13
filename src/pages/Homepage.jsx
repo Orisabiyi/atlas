@@ -1,6 +1,6 @@
 import { useState } from "react";
-import Header from "../components/Header";
 import NavBar from "../components/NavBar";
+import { Outlet } from "react-router-dom";
 
 function Homepage() {
   const [isDark, setIsDark] = useState(false);
@@ -14,7 +14,7 @@ function Homepage() {
       <NavBar isDark={isDark} handleClick={handleClick}>
         AtlasApp
       </NavBar>
-      <Header isDark={isDark} />
+      <Outlet />
     </>
   );
 }
