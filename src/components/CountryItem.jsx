@@ -1,6 +1,14 @@
+import { useNavigate } from "react-router-dom";
+
 function CountryItem({ item }) {
+  const navigate = useNavigate();
+
   return (
-    <div className="card" key={item?.name?.official}>
+    <div
+      className="card"
+      key={item?.name?.official}
+      onClick={() => navigate(item.name)}
+    >
       <div className="card__img">
         <img src={item?.flags?.png} alt={item?.name?.official} />
       </div>
