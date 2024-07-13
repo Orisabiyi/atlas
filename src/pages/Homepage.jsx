@@ -11,7 +11,9 @@ function Homepage() {
 
   return (
     <>
-      <NavBar isDark={isDark} handleClick={handleClick} />
+      <NavBar isDark={isDark} handleClick={handleClick}>
+        AtlasApp
+      </NavBar>
       <Header isDark={isDark} />
     </>
   );
