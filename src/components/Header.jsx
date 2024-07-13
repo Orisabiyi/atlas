@@ -1,6 +1,5 @@
 import { useFetchCountriesandRegion } from "../hooks/FetchCountries";
-
-// import CountryCard from "./CountryCard";
+import CountryCard from "./CountryCard";
 import SearchSub from "./SearchSub";
 
 export default function Header({ isDark }) {
@@ -15,14 +14,19 @@ export default function Header({ isDark }) {
     <header className={`header ${isDark ? "header-dark" : ""}`}>
       <SearchSub
         region={region}
-        setRegion={setRegion}
+        setRegion={setSearch}
         handleSetRegion={handleSetRegion}
       />
-      {/* <div className="header__card">
-        {isLoading && <p>Loading..</p>}
-        {!isLoading && !error && <CountryCard data={countries} />}
-        {!isLoading && error && error}
-      </div> */}
+
+      {isLoading && <p>Loading...</p>}
+
+      {!isLoading && error && <p>{error}</p>}
+
+      {!isLoading && !error && (
+        <div className="header__cards">
+          <CountryCard data={countries} />
+        </div>
+      )}
     </header>
   );
 }
