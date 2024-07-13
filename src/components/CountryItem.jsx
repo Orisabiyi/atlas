@@ -7,7 +7,7 @@ function CountryItem({ item }) {
     <div
       className="card"
       key={item?.name?.official}
-      onClick={() => navigate(item.name)}
+      onClick={() => navigate(item.name.official)}
     >
       <div className="card__img">
         <img src={item?.flags?.png} alt={item?.name?.official} />
