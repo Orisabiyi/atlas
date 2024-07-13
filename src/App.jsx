@@ -1,18 +1,14 @@
-import { useState } from "react";
-import Header from "./components/Header";
-import NavBar from "./components/NavBar";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import Homepage from "./pages/Homepage";
 
-export default function App() {
-  const [isDark, setIsDark] = useState(false);
-
-  function handleClick() {
-    setIsDark((mode) => !mode);
-  }
-
+function App() {
   return (
-    <>
-      <NavBar isDark={isDark} handleClick={handleClick} />
-      <Header isDark={isDark} />
-    </>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Homepage />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
+
+export default App;
