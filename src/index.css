@@ -280,4 +280,5 @@ a:link,
 a:visited {
   color: unset;
   display: inline-block;
+  text-decoration: none;
 }
