@@ -18,6 +18,7 @@ function App() {
           element={<Homepage isDark={isDark} handleClick={handleClick} />}
         >
           <Route index element={<Header isDark={isDark} />} />
+          <Route path="/:country" element={<p>Hello World</p>} />
         </Route>
       </Routes>
     </BrowserRouter>
