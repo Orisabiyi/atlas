@@ -14,7 +14,8 @@ export default function Header({ isDark }) {
     <header className={`header ${isDark ? "header-dark" : ""}`}>
       <SearchSub
         region={region}
-        setRegion={setSearch}
+        setSearch={setSearch}
+        setRegion={setRegion}
         handleSetRegion={handleSetRegion}
       />
 
