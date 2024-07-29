@@ -3,7 +3,7 @@ import CountryCard from "./CountryCard";
 import SearchSub from "./SearchSub";
 
 export default function Header({ isDark }) {
-  const { setSearch, setRegion, error, region, countries, isLoading } =
+  const { setSearch, setRegion, error, region, isLoading } =
     useFetchCountriesandRegion();
 
   function handleSetRegion(e) {
@@ -25,7 +25,7 @@ export default function Header({ isDark }) {
 
       {!isLoading && !error && (
         <div className="header__cards">
-          <CountryCard data={countries} />
+          <CountryCard />
         </div>
       )}
     </header>

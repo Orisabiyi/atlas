@@ -1,9 +1,12 @@
+import { useCountryContext } from "../contexts/CountryContext";
 import CountryItem from "./CountryItem";
 
-export default function CountryCard({ data }) {
+export default function CountryCard() {
+  const { countries } = useCountryContext();
+
   return (
     <>
-      {data?.map((item, i) => (
+      {countries?.map((item, i) => (
         <CountryItem item={item} key={i} />
       ))}
     </>
