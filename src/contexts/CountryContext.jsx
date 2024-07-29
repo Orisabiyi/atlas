@@ -1,9 +1,15 @@
-import { createContext } from "react";
+import { createContext, useContext } from "react";
 
 const countriesContext = createContext();
 
-function CountryContext() {
-  return <div></div>;
+function CountryContext({ children }) {
+  return <countriesContext.Provider>{children}</countriesContext.Provider>;
 }
 
-export default CountryContext;
+function useCountryContext() {
+  const value = useContext(countriesContext);
+
+  return value;
+}
+
+export { CountryContext, useCountryContext };
