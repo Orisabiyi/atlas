@@ -9,6 +9,7 @@ function CountryContext({ children }) {
   const [region, setRegion] = useState("");
   const [countries, setCountries] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [currentCity, setCurrentCity] = useState({});
 
   useEffect(
     function () {
@@ -91,9 +92,31 @@ function CountryContext({ children }) {
     [region, cache]
   );
 
+  async function getCurrentCountry(countryName) {
+    try {
+      const res = await fetch(
+        `https://restcountries.com/v3.1/region/${countryName}`
+      );
+      const data = await res.json();
+      console.log(data);
+      // setCurrentCity(data);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
   return (
     <countriesContext.Provider
-      value={{ setSearch, setRegion, error, region, countries, isLoading }}
+      value={{
+        setSearch,
+        setRegion,
+        error,
+        region,
+        countries,
+        isLoading,
+        getCurrentCountry,
+        currentCity,
+      }}
     >
       {children}
     </countriesContext.Provider>
