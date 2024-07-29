@@ -99,7 +99,7 @@ function CountryContext({ children }) {
       );
       const data = await res.json();
       console.log(data);
-      // setCurrentCity(data);
+      setCurrentCity(data);
     } catch (error) {
       console.log(error);
     }
