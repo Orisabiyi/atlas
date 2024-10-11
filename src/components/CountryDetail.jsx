@@ -26,7 +26,7 @@ function CountryDetail() {
         <span>&larr;</span> <span>Back</span>
       </button>
 
-      <article className="mt-36 flex items-center gap-32">
+      <article className="mt-36 flex flex-col items-center gap-32 lg:flex-row">
         <figure className="w-1/2">
           {currentCity && (
             <img
