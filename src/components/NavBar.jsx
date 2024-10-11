@@ -4,7 +4,7 @@ export default function NavBar({ isDark = "false", handleClick, children }) {
   return (
     <nav className={`navbar ${isDark ? "navbar-dark" : ""}`}>
       <Link to="/">
-        <h1>{children}</h1>
+        <h1 className="font-bold text-[2.2rem]">{children}</h1>
       </Link>
       <div role="button" className="navbar__mode" onClick={handleClick}>
         <img
