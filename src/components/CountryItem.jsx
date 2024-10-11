@@ -5,7 +5,7 @@ function CountryItem({ item }) {
 
   return (
     <div
-      className="card"
+      className="card hover:cursor-pointer"
       key={item?.name?.official}
       onClick={() => navigate(item.name.official)}
     >
